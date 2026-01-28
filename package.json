@@ -1,13 +1,20 @@
 {
-  "name": "temp-astro",
+  "name": "jizhang495-blog",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "jz's blog at jizhang495.github.io",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jizhang495/jizhang495.github.io.git"
+  },
+  "license": "UNLICENSED",
   "dependencies": {
     "astro": "^5.16.16"
   }
