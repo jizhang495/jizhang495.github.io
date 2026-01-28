@@ -35,6 +35,17 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
+      - name: Verify Giscus env
+        run: |
+          for key in PUBLIC_GISCUS_REPO PUBLIC_GISCUS_REPO_ID PUBLIC_GISCUS_CATEGORY PUBLIC_GISCUS_CATEGORY_ID; do
+            val=$(eval echo "\$$key")
+            if [ -z "$val" ]; then
+              echo "Missing $key"
+              exit 1
+            else
+              echo "$key set"
+            fi
+          done
       - name: Build
         run: npm run build
       - name: Configure Pages
