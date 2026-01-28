@@ -1,18 +1,33 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-import { getPublishedPosts, getPageSlice, totalPages, PAGE_SIZE } from '../lib/posts';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getPageSlice, getPublishedPosts, totalPages, PAGE_SIZE } from '../../lib/posts';
 
-const posts = await getPublishedPosts();
-const pagePosts = getPageSlice(posts, 1);
-const total = totalPages(posts);
+export async function getStaticPaths() {
+	const posts = await getPublishedPosts();
+	const total = totalPages(posts);
+
+	if (total <= 1) return [];
+
+	return Array.from({ length: total - 1 }, (_, i) => {
+		const pageNumber = i + 2;
+		return {
+			params: { page: String(pageNumber) },
+			props: { posts: getPageSlice(posts, pageNumber), totalPages: total }
+		};
+	});
+}
+
+const pageNumber = Number(Astro.params.page);
+const { posts, totalPages: total } = Astro.props;
 const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
+
+const prevPage = pageNumber > 1 ? pageNumber - 1 : null;
+const nextPage = pageNumber < total ? pageNumber + 1 : null;
 ---
 
-<SiteLayout title="jz's Blog" description="Updates, notes, and experiments from jz.">
-
-	<section aria-label="Latest posts" class="posts">
-		{pagePosts.length === 0 && <p>No posts yet.</p>}
-		{pagePosts.map((post) => (
+<SiteLayout title={`Page ${pageNumber} · jz's Blog`} description="Blog archive">
+	<section class="posts" aria-label={`Posts page ${pageNumber}`}>
+		{posts.map((post) => (
 			<a class="card" href={`/blog/${post.slug}/`}>
 				<div class="card__head">
 					<h2>{post.data.title}</h2>
@@ -26,22 +41,22 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 		))}
 	</section>
 
-	{total > 1 && (
-		<div class="pagination">
-			<a class="older" href="/blog/2/">Older posts →</a>
-			<p>{PAGE_SIZE} per page · {total} page{total === 1 ? '' : 's'}</p>
-		</div>
-	)}
+	<nav class="pagination" aria-label="Pagination">
+		{prevPage && (
+			<a class="older" href={prevPage === 1 ? '/' : `/blog/${prevPage}/`}>
+				← Newer
+			</a>
+		)}
+		<p>Page {pageNumber} of {total} · {PAGE_SIZE} per page</p>
+		{nextPage && (
+			<a class="older" href={`/blog/${nextPage}/`}>
+				Older →
+			</a>
+		)}
+	</nav>
 </SiteLayout>
 
 <style>
-	.hero {
-		margin-bottom: 1.5rem;
-	}
-	h1 {
-		margin: 0;
-		font-size: clamp(2.2rem, 6vw, 2.8rem);
-	}
 	.posts {
 		display: grid;
 		gap: 1rem;
@@ -96,6 +111,7 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 		margin-top: 1.25rem;
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
 		gap: 0.75rem;
 		color: #475569;
 	}
@@ -105,6 +121,10 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 	}
 	@media (max-width: 680px) {
 		.card__head {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		.pagination {
 			flex-direction: column;
 			align-items: flex-start;
 		}

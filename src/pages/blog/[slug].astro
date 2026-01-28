@@ -1,0 +1,85 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getPrevNext, getPublishedPosts } from '../../lib/posts';
+
+export async function getStaticPaths() {
+	const posts = await getPublishedPosts();
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: {
+			post,
+			prevNext: getPrevNext(posts, post.slug)
+		}
+	}));
+}
+
+const { post, prevNext } = Astro.props;
+const { prev, next } = prevNext;
+const { Content } = await post.render();
+---
+
+<SiteLayout title={`${post.data.title} · jz's Blog`} description={post.data.description}>
+	<PostLayout
+		title={post.data.title}
+		description={post.data.description}
+		published={post.data.published}
+		updated={post.data.updated}
+		tags={post.data.tags}
+	>
+		<Content />
+	</PostLayout>
+
+	<nav class="post-nav" aria-label="Previous and next posts">
+		{prev ? (
+			<a class="nav-link prev" href={`/blog/${prev.slug}/`}>
+				<span class="label">← Newer</span>
+				<span class="title">{prev.data.title}</span>
+			</a>
+		) : (
+			<div />
+		)}
+		{next ? (
+			<a class="nav-link next" href={`/blog/${next.slug}/`}>
+				<span class="label">Older →</span>
+				<span class="title">{next.data.title}</span>
+			</a>
+		) : (
+			<div />
+		)}
+	</nav>
+</SiteLayout>
+
+<style>
+	.post-nav {
+		margin-top: 1.75rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1rem;
+	}
+	.nav-link {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem 1.25rem;
+		border: 1px solid #e2e8f0;
+		border-radius: 12px;
+		background: #ffffff;
+		transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+		box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+	}
+	.nav-link:hover {
+		border-color: #2563eb;
+		box-shadow: 0 14px 34px rgba(37, 99, 235, 0.16);
+		transform: translateY(-1px);
+	}
+	.label {
+		color: #475569;
+		font-size: 0.95rem;
+	}
+	.title {
+		color: #0f172a;
+		font-weight: 600;
+		margin-top: 0.25rem;
+		text-decoration: underline;
+	}
+</style>

@@ -1,0 +1,149 @@
+---
+import Giscus from '../components/Giscus.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	published: Date;
+	updated: Date;
+	tags?: string[];
+	showComments?: boolean;
+}
+
+const {
+	title,
+	description,
+	published,
+	updated,
+	tags = [],
+	showComments = true
+} = Astro.props as Props;
+
+const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
+---
+
+<article class="post">
+	<header class="post__header">
+		<div>
+			{tags.length > 0 && (
+				<div class="tags">
+					{tags.map((tag) => (
+						<span class="tag">{tag}</span>
+					))}
+				</div>
+			)}
+			<h1>{title}</h1>
+			{description && <p class="lede">{description}</p>}
+		</div>
+		<div class="meta">
+			<p><span>Published:</span> {fmt.format(published)}</p>
+			<p><span>Updated:</span> {fmt.format(updated)}</p>
+		</div>
+	</header>
+
+	<div class="post__body">
+		<slot />
+	</div>
+
+	{showComments && (
+		<section class="comments">
+			<h2>Comments</h2>
+			<p class="comments__hint">Sign in with GitHub to join the discussion.</p>
+			<Giscus />
+		</section>
+	)}
+</article>
+
+<style>
+	.post {
+		background: #ffffff;
+		border: 1px solid #e2e8f0;
+		border-radius: 16px;
+		padding: 2rem;
+		box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+	}
+	.post__header {
+		display: flex;
+		justify-content: space-between;
+		gap: 1.5rem;
+		align-items: flex-start;
+		border-bottom: 1px solid #e2e8f0;
+		padding-bottom: 1.25rem;
+		margin-bottom: 1.5rem;
+	}
+	h1 {
+		margin: 0.25rem 0 0.5rem;
+		font-size: clamp(1.9rem, 4vw, 2.4rem);
+	}
+	.lede {
+		margin: 0;
+		color: #334155;
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+	.meta {
+		text-align: right;
+		color: #475569;
+		font-size: 0.95rem;
+		min-width: 180px;
+	}
+	.meta span {
+		color: #0f172a;
+	}
+	.post__body {
+		line-height: 1.75;
+		color: #0f172a;
+		font-size: 1.02rem;
+	}
+	.post__body :global(code) {
+		background: #f1f5f9;
+		border-radius: 6px;
+		padding: 0.15rem 0.3rem;
+		font-size: 0.95rem;
+	}
+	.post__body :global(pre) {
+		background: #0b1224;
+		border-radius: 10px;
+		padding: 1rem;
+		overflow: auto;
+	}
+	.tags {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		margin: 0 0 0.5rem;
+	}
+	.tag {
+		background: #e0f2fe;
+		color: #075985;
+		border: 1px solid #bae6fd;
+		padding: 0.3rem 0.6rem;
+		border-radius: 999px;
+		font-size: 0.9rem;
+	}
+	.comments {
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid #e2e8f0;
+	}
+	.comments h2 {
+		margin-top: 0;
+		margin-bottom: 0.2rem;
+	}
+	.comments__hint {
+		margin: 0 0 1rem;
+		color: #475569;
+		font-size: 0.95rem;
+	}
+	@media (max-width: 720px) {
+		.post {
+			padding: 1.5rem;
+		}
+		.post__header {
+			flex-direction: column;
+		}
+		.meta {
+			text-align: left;
+		}
+	}
+</style>

@@ -1,0 +1,164 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = "jz's Blog", description = "Writing, updates, and notes from jz." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--bg: #f5f7fb;
+				--card: #ffffff;
+				--text: #0f172a;
+				--muted: #475569;
+				--accent: #2563eb;
+				--border: #e2e8f0;
+				color-scheme: light;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+				background: var(--bg);
+				color: var(--text);
+				min-height: 100vh;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+			a:hover {
+				color: var(--accent);
+			}
+			.container {
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 2rem 1.5rem 3rem;
+			}
+			header.topbar {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 2rem;
+				padding: 1rem 0;
+				background: transparent;
+			}
+			.brand {
+				font-weight: 700;
+				font-size: 1.6rem;
+				letter-spacing: 0.03em;
+				color: var(--text);
+				margin: 0;
+			}
+			.brand a {
+				color: inherit;
+			}
+			.social {
+				display: flex;
+				gap: 0.75rem;
+				align-items: center;
+				font-size: 0.95rem;
+				color: var(--muted);
+			}
+			.social a {
+				display: inline-flex;
+				align-items: center;
+			}
+			.social svg {
+				width: 20px;
+				height: 20px;
+				fill: currentColor;
+			}
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				border: 0;
+			}
+			main {
+				display: block;
+			}
+			footer {
+				margin-top: 3rem;
+				font-size: 0.9rem;
+				color: var(--muted);
+				border-top: 1px solid var(--border);
+				padding-top: 1.5rem;
+			}
+			@media (max-width: 640px) {
+				header.topbar {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 0.5rem;
+				}
+				.social {
+					flex-wrap: wrap;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header class="topbar">
+				<h1 class="brand"><a href="/">jz's Blog</a></h1>
+				<nav class="social" aria-label="Social links">
+					<a href="https://www.youtube.com/@jeezig" target="_blank" rel="noreferrer">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8Z" />
+							<path fill="#fff" d="M9.75 8.5 15.5 12l-5.75 3.5Z" />
+						</svg>
+						<span class="sr-only">YouTube</span>
+					</a>
+					<a href="https://github.com/jizhang495" target="_blank" rel="noreferrer">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1 .1 1.6 1 1.6 1 .9 1.6 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-6A4.6 4.6 0 0 1 5 7.2a4.2 4.2 0 0 1 .1-3s1-.3 3.3 1.1a11.3 11.3 0 0 1 6 0C16.6 4 17.6 4.2 17.6 4.2a4.2 4.2 0 0 1 .1 3 4.6 4.6 0 0 1 1.2 3.2c0 4.8-2.8 5.7-5.4 6 .5.4.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z" />
+						</svg>
+						<span class="sr-only">GitHub</span>
+					</a>
+					<a href="https://www.linkedin.com/in/ji-zhang-2a7252b7/" target="_blank" rel="noreferrer">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.8-3s-2 1.4-2 2.9v5.7H9.4V9h3.4v1.6h.1c.5-1 1.7-2 3.4-2 3.7 0 4.3 2.4 4.3 5.4v6.4ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2Zm1.8 13H3.5V9h3.6v11.4Z" />
+						</svg>
+						<span class="sr-only">LinkedIn</span>
+					</a>
+					<a href="https://scholar.google.com/citations?user=ZFsMvJMAAAAJ&hl=en" target="_blank" rel="noreferrer">
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3Zm0 9.7L4.2 9 12 4.6 19.8 9 12 12.7Zm-6 1.5V18c0 1.7 3.3 3 6 3s6-1.3 6-3v-3.8l-6 3.2-6-3.2Zm6 5.2c-2.4 0-4.1-.8-4.1-1.4v-1.5l4 2.1.1.1.1-.1 3.9-2v1.4c0 .6-1.7 1.4-4 1.4Z" />
+						</svg>
+						<span class="sr-only">Google Scholar</span>
+					</a>
+				</nav>
+			</header>
+			<main>
+				<slot />
+			</main>
+			<footer>
+				<div>© {new Date().getFullYear()} Ji Zhang. All rights reserved.</div>
+			</footer>
+		</div>
+	</body>
+</html>

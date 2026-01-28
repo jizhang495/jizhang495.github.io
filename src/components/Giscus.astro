@@ -1,0 +1,64 @@
+---
+const repo = import.meta.env.PUBLIC_GISCUS_REPO;
+const repoId = import.meta.env.PUBLIC_GISCUS_REPO_ID;
+const category = import.meta.env.PUBLIC_GISCUS_CATEGORY;
+const categoryId = import.meta.env.PUBLIC_GISCUS_CATEGORY_ID;
+const mapping = import.meta.env.PUBLIC_GISCUS_MAPPING || 'pathname';
+const theme = import.meta.env.PUBLIC_GISCUS_THEME || 'noborder_light';
+const inputPosition = import.meta.env.PUBLIC_GISCUS_INPUT_POSITION || 'top';
+const configured = Boolean(repo && repoId && category && categoryId);
+---
+
+{configured ? (
+	<>
+		<div class="giscus"></div>
+		<script
+			src="https://giscus.app/client.js"
+			data-repo={repo}
+			data-repo-id={repoId}
+			data-category={category}
+			data-category-id={categoryId}
+			data-mapping={mapping}
+			data-strict="0"
+			data-reactions-enabled="1"
+			data-emit-metadata="0"
+			data-input-position={inputPosition}
+			data-theme={theme}
+			data-lang="en"
+			data-loading="lazy"
+			crossorigin="anonymous"
+			async
+		></script>
+	</>
+) : (
+	<div class="giscus-placeholder">
+		<p>Comments are disabled until Giscus environment variables are set.</p>
+		<p class="hint">
+			Add <code>PUBLIC_GISCUS_REPO</code>, <code>PUBLIC_GISCUS_REPO_ID</code>, <code>
+				PUBLIC_GISCUS_CATEGORY
+			</code>, and <code>PUBLIC_GISCUS_CATEGORY_ID</code>.
+		</p>
+	</div>
+)}
+
+<style>
+	.giscus {
+		width: 100%;
+	}
+	.giscus-placeholder {
+		border: 1px dashed #cbd5e1;
+		padding: 1rem 1.25rem;
+		border-radius: 10px;
+		background: #f8fafc;
+		color: #334155;
+	}
+	.giscus-placeholder .hint {
+		color: #475569;
+		font-size: 0.95rem;
+	}
+	code {
+		background: #e2e8f0;
+		border-radius: 4px;
+		padding: 0.15rem 0.35rem;
+	}
+</style>
