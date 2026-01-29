@@ -34,7 +34,7 @@ const nextPage = pageNumber < total ? pageNumber + 1 : null;
 						<a class="title-link" href={`/blog/${post.slug}/`}>{post.data.title}</a>
 					</h2>
 					<div class="dates">
-						<span>{fmt.format(post.data.updated)}</span>
+						<span>{fmt.format(post.data.published)}</span>
 					</div>
 				</div>
 				<p class="description">{post.data.description}</p>

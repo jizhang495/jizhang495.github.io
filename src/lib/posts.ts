@@ -5,7 +5,7 @@ export const PAGE_SIZE = 5;
 
 export async function getPublishedPosts() {
 	const posts = await getCollection('blog', ({ data }) => !data.draft);
-	return posts.sort((a, b) => b.data.updated.getTime() - a.data.updated.getTime());
+	return posts.sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 }
 
 export function getPageSlice(posts: CollectionEntry<'blog'>[], page: number) {

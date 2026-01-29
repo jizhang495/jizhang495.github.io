@@ -4,7 +4,7 @@ This repo hosts a minimal Astro-based personal blog intended to be Markdown-firs
 
 ## Goals
 - Minimalist homepage: nickname left, social links (YouTube, GitHub, LinkedIn, Google Scholar) right.
-- Home page lists blog posts by **Last updated** descending.
+- Home page lists blog posts by **Published date** descending.
 - Each post has: title, published date, updated date, and Markdown body.
 - Home list shows a **2-line description** for each post.
 - Pagination for older posts.
