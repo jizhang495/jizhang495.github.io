@@ -1,6 +1,6 @@
 # jz's Blog
 
-Source for [jizhang495.github.io](https://jizhang495.github.io), built with Astro. Posts are Markdown-first and sorted by last updated date.
+Source for [jizhang495.github.io](https://jizhang495.github.io), built with [Astro](https://github.com/withastro/astro). Posts are Markdown-first and sorted by last updated date.
 
 ## Features
 - Markdown content in `src/content/blog/*.md` with frontmatter for title, description (<=180 chars), published/updated dates, optional tags, and draft flag.
