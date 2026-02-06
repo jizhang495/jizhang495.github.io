@@ -22,7 +22,7 @@ It seems as if the best solution is to find a girlfriend. Of course it is! That 
 
 So how to cope with this excruciating loneliness? 
 
-# Continuity of Life
+## Continuity of Life
 
 I've come to realize that the continuity of memory may be the essence of life. Depending on the level of abstraction, the answer to the philosophical question "Who am I?" might be:
 1. my brain, 
@@ -37,7 +37,7 @@ As a civilization, our collective life may be infinite. Perhaps loneliness matte
 
 As an individual, my life is finite, and loneliness does become a concern, because my time with people I love will be limited--there is an urgency to maximize such overlaps in continuity.
 
-# Hierarchy of Experiences
+## Hierarchy of Experiences
 
 As an individual with finite time, living among other individuals with finite time, I yearn for some form of eternity--for my loved ones and for myself--much like how ancient Egyptians preserved bodies in pyramids. Whether by building something that lasts, making recorded achievements, taking photographs, or writing blog posts, we try to leave an indelible mark on history, as if we are speaking to someone in the future--an intertemporal connection that alleviates loneliness. And I often wish that my favorite bygone authors and artists could know how I much I love their work. 
 
@@ -67,7 +67,7 @@ The higher the tier, the more nourishing the experience--and the more it increas
   ></iframe>
 </div>
 
-# What Next
+## What Next
 
 Understanding life, happiness, and loneliness is a lifelong process of exploration and introspection. I don't know how the world and my life will unfold, but it's clear to me that I should protect my Tier 1 experiences, maintain consistent Tier 2 experiences, and use Tier 3 experiences to fill the gaps. 
 
