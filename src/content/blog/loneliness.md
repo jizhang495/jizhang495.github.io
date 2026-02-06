@@ -57,12 +57,6 @@ But not all narratives feel equal. Their value depends on depth, continuity, and
 
 The higher the tier, the more nourishing the experience--and the more it increases happiness while reducing loneliness.
 
-# What Next
-
-Understanding life, happiness, and loneliness is a lifelong process of exploration and introspection. I don't know how the world and my life will unfold, but it's clear to me that I should protect my Tier 1 experiences, maintain consistent Tier 2 experiences, and use Tier 3 experiences to fill the gaps. 
-
-When I am single, far away from my parents, with busy friends or busy schedule myself, Tier 3 experiences become my way of coping with solitude. Blog writing belongs in this category.
-
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.12);">
   <iframe
     src="https://www.youtube.com/embed/Ra-GiusdK1w"
@@ -72,5 +66,11 @@ When I am single, far away from my parents, with busy friends or busy schedule m
     allowfullscreen
   ></iframe>
 </div>
+
+# What Next
+
+Understanding life, happiness, and loneliness is a lifelong process of exploration and introspection. I don't know how the world and my life will unfold, but it's clear to me that I should protect my Tier 1 experiences, maintain consistent Tier 2 experiences, and use Tier 3 experiences to fill the gaps. 
+
+When I am single, far away from my parents, with busy friends or busy schedule myself, Tier 3 experiences become my way of coping with solitude. Blog writing belongs in this category.
 
 Today, I'm writing this post to myself as a snapshot of my life. I'm talking to my greatest listener--the one whose continuity overlaps with mine completely. (And perhaps also to my future self, who may find this post super naive.) I feel a sense of catharsis now, as if I'm not lonely anymore. For now, this is one way I'm learning to be self-sufficient.

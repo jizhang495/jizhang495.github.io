@@ -44,6 +44,8 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 		<slot />
 	</div>
 
+	{Astro.slots.has('post-nav') && <slot name="post-nav" />}
+
 	{showComments && (
 		<section class="comments">
 			<h2>Comments</h2>
