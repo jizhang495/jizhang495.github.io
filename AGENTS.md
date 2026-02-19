@@ -3,7 +3,7 @@
 This repo hosts a minimal Astro-based personal blog intended to be Markdown-first, fast, and long-lived.
 
 ## Goals
-- Minimalist homepage: nickname left, social links (YouTube, GitHub, LinkedIn, Google Scholar) right.
+- Minimalist homepage: nickname left, social links (YouTube, GitHub, LinkedIn, Google Scholar, CV) right.
 - Home page lists blog posts by **Published date** descending.
 - Each post has: title, published date, updated date, and Markdown body.
 - Home list shows a **2-line description** for each post.
@@ -12,6 +12,7 @@ This repo hosts a minimal Astro-based personal blog intended to be Markdown-firs
   - Title + published/updated
   - Prev/Next navigation (ordered by updated date)
   - GitHub-login comments via Giscus
+- Standalone CV page at `/cv` authored in Markdown with no site header/top navigation ("jz's blog", social links, or back-to-home nav).
 - RSS feed for updates.
 
 ## Content model
@@ -30,6 +31,8 @@ Posts live in `src/content/blog/*.md` with frontmatter:
 - `src/pages/blog/[page].astro` — pagination (page 2..N)
 - `src/pages/blog/[...slug].astro` — post renderer + prev/next
 - `src/layouts/PostLayout.astro` — post page layout + comments
+- `src/pages/cv.md` — CV page content (Markdown)
+- `src/layouts/CVLayout.astro` — no-chrome layout for `/cv`
 - `src/components/Giscus.astro` — comments embed
 - `src/pages/rss.xml.ts` — RSS feed
 - `.github/workflows/deploy.yml` — GitHub Pages deployment workflow
@@ -38,6 +41,7 @@ Posts live in `src/content/blog/*.md` with frontmatter:
 - Homepage: `/`
 - Posts: `/blog/<slug>/`
 - Pagination: `/blog/2/`, `/blog/3/`, ...
+- CV: `/cv`
 Stable slugs are important; avoid changing slugs after publishing.
 
 ## Comments (Giscus)

@@ -52,6 +52,26 @@ const { title = 'CV', description = 'Curriculum vitae' } = Astro.props;
 				max-width: none;
 				margin: 0;
 			}
+			main :global(table) {
+				width: 100%;
+				border-collapse: separate;
+				border-spacing: 0 0.3rem;
+			}
+			main :global(thead) {
+				display: none;
+			}
+			main :global(th),
+			main :global(td) {
+				padding: 0;
+				text-align: left;
+				vertical-align: top;
+			}
+			main :global(th:first-child),
+			main :global(td:first-child) {
+				width: 7.5rem;
+				padding-right: 1.5rem;
+				white-space: nowrap;
+			}
 			@media print {
 				body {
 					font-size: 11pt;
