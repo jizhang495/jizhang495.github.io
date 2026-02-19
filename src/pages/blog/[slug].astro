@@ -17,8 +17,8 @@ export async function getStaticPaths() {
 const { post, prevNext } = Astro.props;
 const { prev, next } = prevNext;
 const { Content } = await post.render();
-const previous = prev;
-const nextPost = next;
+const previous = next;
+const nextPost = prev;
 ---
 
 <SiteLayout title={`${post.data.title} · jz's Blog`} description={post.data.description}>
