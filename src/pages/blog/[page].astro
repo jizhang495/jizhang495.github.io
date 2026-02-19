@@ -45,13 +45,13 @@ const nextPage = pageNumber < total ? pageNumber + 1 : null;
 	<nav class="pagination" aria-label="Pagination">
 		{prevPage && (
 			<a class="older" href={prevPage === 1 ? '/' : `/blog/${prevPage}/`}>
-				← Newer
+				← Previous
 			</a>
 		)}
 		<p>Page {pageNumber} of {total} · {PAGE_SIZE} per page</p>
 		{nextPage && (
 			<a class="older" href={`/blog/${nextPage}/`}>
-				Older →
+				Next →
 			</a>
 		)}
 	</nav>
