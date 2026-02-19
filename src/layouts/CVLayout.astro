@@ -16,6 +16,12 @@ const { title = 'CV', description = 'Curriculum vitae' } = Astro.props;
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
 			:root {
 				color-scheme: light;
@@ -68,7 +74,7 @@ const { title = 'CV', description = 'Curriculum vitae' } = Astro.props;
 			}
 			main :global(th:first-child),
 			main :global(td:first-child) {
-				width: 7.5rem;
+				width: 6rem;
 				padding-right: 1.5rem;
 				white-space: nowrap;
 			}
