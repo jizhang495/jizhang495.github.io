@@ -13,6 +13,7 @@ Researcher in electrochemical systems, actuators and sensors, additive manufactu
 | | |
 | :--- | :--- |
 | 2025– | **Research Associate**, University of Cambridge |
+| 2025 | **Process Engineer Intern**, NanoPrint Innovations Limited (UK) |
 
 ## Education
 
