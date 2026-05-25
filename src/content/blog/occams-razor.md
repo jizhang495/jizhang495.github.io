@@ -5,7 +5,7 @@ published: 2026-05-25
 updated: 2026-05-25
 tags:
   - life
-draft: true
+draft: false
 ---
 
 Before answering the question of "how to live", we need an understanding of reality. Is there a creator--God, aliens, or a simulator? What happens to my first-person stream of consciousness after I die? Is there an afterlife?
