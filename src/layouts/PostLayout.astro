@@ -29,7 +29,7 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 			{tags.length > 0 && (
 				<div class="tags">
 					{tags.map((tag) => (
-						<a class="tag" href={getTagHref(tag)}>{tag}</a>
+						<a class="tag" href={getTagHref(tag)} data-tag={tag}>{tag}</a>
 					))}
 				</div>
 			)}
@@ -114,17 +114,33 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 		margin: 0 0 0.5rem;
 	}
 	.tag {
-		background: #e0f2fe;
-		color: #0369a1;
-		border: 1px solid #bae6fd;
+		background: #f3f4f6;
+		color: #374151;
+		border: 1px solid #d1d5db;
 		padding: 0.16rem 0.45rem;
 		border-radius: 10px;
 		font-size: 0.9rem;
 		text-decoration: none;
 	}
+	.tag[data-tag='intro'] {
+		border-color: #fbcfe8;
+		background: #fce7f3;
+		color: #be185d;
+	}
+	.tag[data-tag='life'] {
+		border-color: #fed7aa;
+		background: #ffedd5;
+		color: #c2410c;
+	}
 	.tag:hover {
-		border-color: #2563eb;
+		border-color: #6b7280;
 		text-decoration: none;
+	}
+	.tag[data-tag='intro']:hover {
+		border-color: #db2777;
+	}
+	.tag[data-tag='life']:hover {
+		border-color: #ea580c;
 	}
 	.comments {
 		margin-top: 2.5rem;
