@@ -2,6 +2,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 
 export const PAGE_SIZE = 5;
+const TAG_ORDER = ['intro', 'life', 'science', 'fiction'];
 
 export async function getPublishedPosts() {
 	const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -18,9 +19,16 @@ export function totalPages(posts: CollectionEntry<'blog'>[]) {
 }
 
 export function getAllTags(posts: CollectionEntry<'blog'>[]) {
-	return Array.from(new Set(posts.flatMap((post) => post.data.tags))).sort((a, b) =>
-		a.localeCompare(b)
-	);
+	return Array.from(new Set(posts.flatMap((post) => post.data.tags))).sort((a, b) => {
+		const aIndex = TAG_ORDER.indexOf(a);
+		const bIndex = TAG_ORDER.indexOf(b);
+		if (aIndex !== -1 || bIndex !== -1) {
+			if (aIndex === -1) return 1;
+			if (bIndex === -1) return -1;
+			return aIndex - bIndex;
+		}
+		return a.localeCompare(b);
+	});
 }
 
 export function getPostsByTag(posts: CollectionEntry<'blog'>[], tag: string) {

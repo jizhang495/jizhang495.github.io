@@ -61,6 +61,16 @@ const allActive = activeTag === undefined;
 		background: #ffedd5;
 		color: #c2410c;
 	}
+	.tag-filter__item[data-tag='science'] {
+		border-color: #bfdbfe;
+		background: #dbeafe;
+		color: #1d4ed8;
+	}
+	.tag-filter__item[data-tag='fiction'] {
+		border-color: #ddd6fe;
+		background: #ede9fe;
+		color: #6d28d9;
+	}
 	.tag-filter__item.active {
 		background: #374151;
 		border-color: #374151;
@@ -76,6 +86,16 @@ const allActive = activeTag === undefined;
 		border-color: #c2410c;
 		color: #fff7ed;
 	}
+	.tag-filter__item[data-tag='science'].active {
+		background: #1d4ed8;
+		border-color: #1d4ed8;
+		color: #eff6ff;
+	}
+	.tag-filter__item[data-tag='fiction'].active {
+		background: #6d28d9;
+		border-color: #6d28d9;
+		color: #f5f3ff;
+	}
 	.tag-filter__item:hover {
 		text-decoration: none;
 		border-color: #6b7280;
@@ -85,5 +105,11 @@ const allActive = activeTag === undefined;
 	}
 	.tag-filter__item[data-tag='life']:hover {
 		border-color: #ea580c;
+	}
+	.tag-filter__item[data-tag='science']:hover {
+		border-color: #2563eb;
+	}
+	.tag-filter__item[data-tag='fiction']:hover {
+		border-color: #7c3aed;
 	}
 </style>

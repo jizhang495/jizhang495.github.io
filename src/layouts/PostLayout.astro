@@ -132,6 +132,16 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 		background: #ffedd5;
 		color: #c2410c;
 	}
+	.tag[data-tag='science'] {
+		border-color: #bfdbfe;
+		background: #dbeafe;
+		color: #1d4ed8;
+	}
+	.tag[data-tag='fiction'] {
+		border-color: #ddd6fe;
+		background: #ede9fe;
+		color: #6d28d9;
+	}
 	.tag:hover {
 		border-color: #6b7280;
 		text-decoration: none;
@@ -141,6 +151,12 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 	}
 	.tag[data-tag='life']:hover {
 		border-color: #ea580c;
+	}
+	.tag[data-tag='science']:hover {
+		border-color: #2563eb;
+	}
+	.tag[data-tag='fiction']:hover {
+		border-color: #7c3aed;
 	}
 	.comments {
 		margin-top: 2.5rem;
