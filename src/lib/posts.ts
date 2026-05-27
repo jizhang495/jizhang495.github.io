@@ -1,7 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 
-export const PAGE_SIZE = 5;
+export const PAGE_SIZE = 42;
 const TAG_ORDER = ['intro', 'life', 'science', 'fiction'];
 
 export async function getPublishedPosts() {

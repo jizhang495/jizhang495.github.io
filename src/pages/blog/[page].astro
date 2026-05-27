@@ -3,7 +3,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import PostList from '../../components/PostList.astro';
 import PostPagination from '../../components/PostPagination.astro';
 import TagFilter from '../../components/TagFilter.astro';
-import { getAllTags, getPageSlice, getPublishedPosts, totalPages, PAGE_SIZE } from '../../lib/posts';
+import { getAllTags, getPageSlice, getPublishedPosts, totalPages } from '../../lib/posts';
 
 export async function getStaticPaths() {
 	const posts = await getPublishedPosts();
@@ -28,5 +28,5 @@ const { posts, tags, totalPages: total } = Astro.props;
 <SiteLayout title={`Page ${pageNumber} · jz's Blog`} description="Blog archive">
 	<TagFilter tags={tags} />
 	<PostList posts={posts} ariaLabel={`Posts page ${pageNumber}`} />
-	<PostPagination pageNumber={pageNumber} totalPages={total} pageSize={PAGE_SIZE} firstHref="/" pagePrefix="/blog/" />
+	<PostPagination pageNumber={pageNumber} totalPages={total} firstHref="/" pagePrefix="/blog/" />
 </SiteLayout>

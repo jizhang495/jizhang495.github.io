@@ -4,7 +4,6 @@ import PostPagination from '../../../components/PostPagination.astro';
 import TagFilter from '../../../components/TagFilter.astro';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import {
-	PAGE_SIZE,
 	getAllTags,
 	getPageSlice,
 	getPostsByTag,
@@ -48,7 +47,6 @@ const tagHref = getTagHref(activeTag);
 	<PostPagination
 		pageNumber={pageNumber}
 		totalPages={total}
-		pageSize={PAGE_SIZE}
 		firstHref={tagHref}
 		pagePrefix={tagHref}
 	/>

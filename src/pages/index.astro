@@ -3,7 +3,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import PostList from '../components/PostList.astro';
 import PostPagination from '../components/PostPagination.astro';
 import TagFilter from '../components/TagFilter.astro';
-import { getAllTags, getPublishedPosts, getPageSlice, totalPages, PAGE_SIZE } from '../lib/posts';
+import { getAllTags, getPublishedPosts, getPageSlice, totalPages } from '../lib/posts';
 
 const posts = await getPublishedPosts();
 const pagePosts = getPageSlice(posts, 1);
@@ -14,5 +14,5 @@ const tags = getAllTags(posts);
 <SiteLayout title="jz's Blog" description="Writing, notes, and reflections by jz.">
 	<TagFilter tags={tags} />
 	<PostList posts={pagePosts} ariaLabel="Latest posts" />
-	<PostPagination pageNumber={1} totalPages={total} pageSize={PAGE_SIZE} firstHref="/" pagePrefix="/blog/" />
+	<PostPagination pageNumber={1} totalPages={total} firstHref="/" pagePrefix="/blog/" />
 </SiteLayout>
