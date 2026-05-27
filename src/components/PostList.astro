@@ -1,0 +1,128 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getTagHref } from '../lib/posts';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+	ariaLabel?: string;
+	emptyMessage?: string;
+}
+
+const {
+	posts,
+	ariaLabel = 'Posts',
+	emptyMessage = 'No posts yet.'
+} = Astro.props as Props;
+const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
+---
+
+<section aria-label={ariaLabel} class="posts">
+	{posts.length === 0 && <p class="empty">{emptyMessage}</p>}
+	{posts.map((post) => (
+		<article class="post">
+			<div class="post__head">
+				<div class="post__title-row">
+					<h2>
+						<a class="title-link" href={`/blog/${post.slug}/`}>{post.data.title}</a>
+					</h2>
+					{post.data.tags.length > 0 && (
+						<div class="post__tags" aria-label={`Tags for ${post.data.title}`}>
+							{post.data.tags.map((tag) => (
+								<a class="tag" href={getTagHref(tag)}>{tag}</a>
+							))}
+						</div>
+					)}
+				</div>
+				<div class="dates">
+					<time datetime={post.data.published.toISOString().slice(0, 10)}>
+						{fmt.format(post.data.published)}
+					</time>
+				</div>
+			</div>
+			<p class="description">{post.data.description}</p>
+		</article>
+	))}
+</section>
+
+<style>
+	.posts {
+		display: grid;
+		gap: 1rem;
+	}
+	.post {
+		padding: 0.4rem 0;
+	}
+	.post__head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.6rem;
+	}
+	.post__title-row {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		min-width: 0;
+	}
+	.post h2 {
+		margin: 0;
+		font-size: 1.35rem;
+		color: #0f172a;
+		text-decoration: underline;
+	}
+	.title-link {
+		color: inherit;
+	}
+	.post__tags {
+		display: inline-flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+	}
+	.tag {
+		display: inline-flex;
+		align-items: center;
+		min-height: 1.25rem;
+		padding: 0.12rem 0.4rem;
+		border: 1px solid #bae6fd;
+		border-radius: 10px;
+		background: #e0f2fe;
+		color: #0369a1;
+		font-size: 0.8rem;
+		line-height: 1;
+		text-decoration: none;
+	}
+	.tag:hover {
+		border-color: #2563eb;
+		text-decoration: none;
+	}
+	.dates {
+		color: #475569;
+		font-size: 0.95rem;
+		white-space: nowrap;
+		text-decoration: none;
+	}
+	.description {
+		margin: 0;
+		color: #0f172a;
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-decoration: none;
+	}
+	.empty {
+		margin: 0;
+		color: #475569;
+	}
+	@media (max-width: 680px) {
+		.post__head {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.35rem;
+		}
+	}
+</style>

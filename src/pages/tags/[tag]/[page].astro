@@ -1,0 +1,55 @@
+---
+import PostList from '../../../components/PostList.astro';
+import PostPagination from '../../../components/PostPagination.astro';
+import TagFilter from '../../../components/TagFilter.astro';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import {
+	PAGE_SIZE,
+	getAllTags,
+	getPageSlice,
+	getPostsByTag,
+	getPublishedPosts,
+	getTagHref,
+	totalPages
+} from '../../../lib/posts';
+
+export async function getStaticPaths() {
+	const allPosts = await getPublishedPosts();
+	const tags = getAllTags(allPosts);
+
+	return tags.flatMap((tag) => {
+		const posts = getPostsByTag(allPosts, tag);
+		const total = totalPages(posts);
+		if (total <= 1) return [];
+
+		return Array.from({ length: total - 1 }, (_, i) => {
+			const pageNumber = i + 2;
+			return {
+				params: { tag, page: String(pageNumber) },
+				props: {
+					activeTag: tag,
+					posts: getPageSlice(posts, pageNumber),
+					tags,
+					totalPages: total
+				}
+			};
+		});
+	});
+}
+
+const pageNumber = Number(Astro.params.page);
+const { activeTag, posts, tags, totalPages: total } = Astro.props;
+const tagHref = getTagHref(activeTag);
+---
+
+<SiteLayout title={`${activeTag} · Page ${pageNumber} · jz's Blog`} description={`Posts tagged ${activeTag}.`}>
+	<TagFilter tags={tags} activeTag={activeTag} />
+	<PostList posts={posts} ariaLabel={`Posts tagged ${activeTag}, page ${pageNumber}`} />
+	<PostPagination
+		pageNumber={pageNumber}
+		totalPages={total}
+		pageSize={PAGE_SIZE}
+		firstHref={tagHref}
+		pagePrefix={tagHref}
+	/>
+</SiteLayout>

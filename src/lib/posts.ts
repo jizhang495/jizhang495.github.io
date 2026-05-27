@@ -17,6 +17,20 @@ export function totalPages(posts: CollectionEntry<'blog'>[]) {
 	return Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
 }
 
+export function getAllTags(posts: CollectionEntry<'blog'>[]) {
+	return Array.from(new Set(posts.flatMap((post) => post.data.tags))).sort((a, b) =>
+		a.localeCompare(b)
+	);
+}
+
+export function getPostsByTag(posts: CollectionEntry<'blog'>[], tag: string) {
+	return posts.filter((post) => post.data.tags.includes(tag));
+}
+
+export function getTagHref(tag: string) {
+	return `/tags/${encodeURIComponent(tag)}/`;
+}
+
 export function getPrevNext(posts: CollectionEntry<'blog'>[], slug: string) {
 	const index = posts.findIndex((post) => post.slug === slug);
 	if (index === -1) return { prev: undefined, next: undefined };

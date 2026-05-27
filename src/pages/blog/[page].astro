@@ -1,10 +1,14 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { getPageSlice, getPublishedPosts, totalPages, PAGE_SIZE } from '../../lib/posts';
+import PostList from '../../components/PostList.astro';
+import PostPagination from '../../components/PostPagination.astro';
+import TagFilter from '../../components/TagFilter.astro';
+import { getAllTags, getPageSlice, getPublishedPosts, totalPages, PAGE_SIZE } from '../../lib/posts';
 
 export async function getStaticPaths() {
 	const posts = await getPublishedPosts();
 	const total = totalPages(posts);
+	const tags = getAllTags(posts);
 
 	if (total <= 1) return [];
 
@@ -12,113 +16,17 @@ export async function getStaticPaths() {
 		const pageNumber = i + 2;
 		return {
 			params: { page: String(pageNumber) },
-			props: { posts: getPageSlice(posts, pageNumber), totalPages: total }
+			props: { posts: getPageSlice(posts, pageNumber), tags, totalPages: total }
 		};
 	});
 }
 
 const pageNumber = Number(Astro.params.page);
-const { posts, totalPages: total } = Astro.props;
-const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
-
-const prevPage = pageNumber > 1 ? pageNumber - 1 : null;
-const nextPage = pageNumber < total ? pageNumber + 1 : null;
+const { posts, tags, totalPages: total } = Astro.props;
 ---
 
 <SiteLayout title={`Page ${pageNumber} · jz's Blog`} description="Blog archive">
-	<section class="posts" aria-label={`Posts page ${pageNumber}`}>
-		{posts.map((post) => (
-			<article class="card">
-				<div class="card__head">
-					<h2>
-						<a class="title-link" href={`/blog/${post.slug}/`}>{post.data.title}</a>
-					</h2>
-					<div class="dates">
-						<span>{fmt.format(post.data.published)}</span>
-					</div>
-				</div>
-				<p class="description">{post.data.description}</p>
-			</article>
-		))}
-	</section>
-
-	<nav class="pagination" aria-label="Pagination">
-		{prevPage && (
-			<a class="older" href={prevPage === 1 ? '/' : `/blog/${prevPage}/`}>
-				← Previous
-			</a>
-		)}
-		<p>Page {pageNumber} of {total} · {PAGE_SIZE} per page</p>
-		{nextPage && (
-			<a class="older" href={`/blog/${nextPage}/`}>
-				Next →
-			</a>
-		)}
-	</nav>
+	<TagFilter tags={tags} />
+	<PostList posts={posts} ariaLabel={`Posts page ${pageNumber}`} />
+	<PostPagination pageNumber={pageNumber} totalPages={total} pageSize={PAGE_SIZE} firstHref="/" pagePrefix="/blog/" />
 </SiteLayout>
-
-<style>
-	.posts {
-		display: grid;
-		gap: 1rem;
-	}
-	.card {
-		padding: 0.4rem 0;
-	}
-	.card__head {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-		margin-bottom: 0.6rem;
-	}
-	.card h2 {
-		margin: 0;
-		font-size: 1.35rem;
-		color: #0f172a;
-		text-decoration: underline;
-	}
-	.title-link {
-		color: inherit;
-	}
-	.dates {
-		color: #475569;
-		font-size: 0.95rem;
-		display: flex;
-		gap: 0.9rem;
-		flex-wrap: wrap;
-		text-decoration: none;
-	}
-	.description {
-		margin: 0;
-		color: #0f172a;
-		line-height: 1.5;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-		text-decoration: none;
-	}
-	.pagination {
-		margin-top: 1.25rem;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 0.75rem;
-		color: #475569;
-	}
-	.older {
-		color: #2563eb;
-		font-weight: 600;
-	}
-	@media (max-width: 680px) {
-		.card__head {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-		.pagination {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-	}
-</style>

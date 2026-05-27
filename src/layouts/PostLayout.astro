@@ -1,5 +1,6 @@
 ---
 import Giscus from '../components/Giscus.astro';
+import { getTagHref } from '../lib/posts';
 
 interface Props {
 	title: string;
@@ -28,7 +29,7 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 			{tags.length > 0 && (
 				<div class="tags">
 					{tags.map((tag) => (
-						<span class="tag">{tag}</span>
+						<a class="tag" href={getTagHref(tag)}>{tag}</a>
 					))}
 				</div>
 			)}
@@ -114,11 +115,16 @@ const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 	}
 	.tag {
 		background: #e0f2fe;
-		color: #075985;
+		color: #0369a1;
 		border: 1px solid #bae6fd;
-		padding: 0.3rem 0.6rem;
-		border-radius: 999px;
+		padding: 0.16rem 0.45rem;
+		border-radius: 10px;
 		font-size: 0.9rem;
+		text-decoration: none;
+	}
+	.tag:hover {
+		border-color: #2563eb;
+		text-decoration: none;
 	}
 	.comments {
 		margin-top: 2.5rem;

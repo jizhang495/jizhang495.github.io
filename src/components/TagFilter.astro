@@ -1,0 +1,56 @@
+---
+import { getTagHref } from '../lib/posts';
+
+interface Props {
+	tags: string[];
+	activeTag?: string;
+}
+
+const { tags, activeTag } = Astro.props;
+const allActive = activeTag === undefined;
+---
+
+<nav class="tag-filter" aria-label="Filter posts by tag">
+	<a class:list={['tag-filter__item', { active: allActive }]} href="/" aria-current={allActive ? 'page' : undefined}>all</a>
+	{tags.map((tag) => (
+		<a
+			class:list={['tag-filter__item', { active: activeTag === tag }]}
+			href={getTagHref(tag)}
+			aria-current={activeTag === tag ? 'page' : undefined}
+		>
+			{tag}
+		</a>
+	))}
+</nav>
+
+<style>
+	.tag-filter {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin: 0 0 1.5rem;
+	}
+	.tag-filter__item {
+		display: inline-flex;
+		align-items: center;
+		min-height: 1.45rem;
+		padding: 0.18rem 0.48rem;
+		border-radius: 10px;
+		border: 1px solid #bae6fd;
+		background: #e0f2fe;
+		color: #0369a1;
+		font-size: 0.9rem;
+		line-height: 1;
+		text-decoration: none;
+	}
+	.tag-filter__item.active {
+		background: #0369a1;
+		border-color: #0369a1;
+		color: #f0f9ff;
+	}
+	.tag-filter__item:hover {
+		text-decoration: none;
+		border-color: #2563eb;
+	}
+</style>
